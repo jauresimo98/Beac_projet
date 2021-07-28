@@ -2,8 +2,105 @@
 
 
 {% block content %}
+<br>
 
-<h1>bonjour </h1>
+<div class="row">
 
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Compte:</h5>
+			<hr>
+			<form class="row g-3">
+                <div class="col-auto">
+                    <label for="inputTiers" class="visually-hidden">Tiers</label>
+                    <input type="text" class="form-control" id="inputTiers" placeholder="Tiers">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden">Periode</label>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <option selected>Open this select menu</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <label for="floatingSelectGrid">Choisir Jour</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <option selected>Open this select menu</option>
+                                <option value="jan">jan</option>
+                                <option value="fev">fev</option>
+                                <option value="mar">mar</option>
+                            </select>
+                            <label for="floatingSelectGrid">Choisir Mois</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="floatingSelectGrid">Choisir Annee</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Valider</button>
+                </div>
+            </form>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Description Compte</h5>
+            <p></p>
+			<p></p>
+            <hr>
+            <h1 style="text-align: center;padding: 10px"></h1>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Destinataire</h5>
+            <p></p>
+            <p></p>
+			<hr>
+			<h1 style="text-align: center;padding: 10px"></h1>
+		</div>
+	</div>
+</div>
+
+<br>
+<!-- <div class="row">
+	    <div class="col">
+		    <div class="card card-body">
+			    <form method="get">
+                    <button class="btn btn-primary" type="submit">Search</button>
+		        </form>
+		    </div>
+	    </div>
+    </div>
+ -->
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Tiers</th>
+					<th>Description Compte</th>
+					<th>Periode</th>
+					<th>Solde</th>
+                    <th>Destinataire</th>
+				</tr>
+            </table>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
