@@ -43,6 +43,8 @@ Usage : voir les exemples, à la fin du script.
 Note : traduction franco-française, avec unités variables, orthographe géré, unités et centièmes.
 """
 num = 0
+G_mois = ''
+G_jour = ''
 
 def home (request):
     return render(request, 'home.html')
@@ -100,12 +102,27 @@ def simple_upload(request):
                 )
                 mouvement.save()
 
-                #print(num_compte)
-                #print(compte_int[12:17])
-            #for elt in data:
-               #  print(elt)
+               
 
     return render(request, 'input.html')
+
+
+def periode(request):
+    return render(request,'periode.html')
+
+
+def recupere_periode (request):
+    data=dict()
+    
+    if request.method=='POST':
+        G_jour = request.POST.get('jour')
+        G_mois = request.POST.get('mois')
+        print(G_jour)
+        print(G_mois)
+
+    return  render(request,'input.html')
+
+
 
 
 

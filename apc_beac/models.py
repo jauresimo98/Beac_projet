@@ -13,7 +13,7 @@ class Mouvement(models.Model):
     solde = models.CharField(max_length=254, null=True)
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
-    num_tiers = models.CharField(max_length=254, null=True)
+    tiers = models.CharField(max_length=254, null=True)
 
 
 # class ReleveCompte(models.Model):
