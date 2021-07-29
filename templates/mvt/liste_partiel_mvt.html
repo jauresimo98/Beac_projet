@@ -1,0 +1,37 @@
+<table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>centre</th>
+        <th>compte</th>
+        <th>tiers</th>
+        <th>periode</th>
+        <th>solde</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for mvt in mvt %}
+      <tr>
+        <td>{{ mvt.id }}</td>
+        <td>{{ mvt.centre }}</td>
+        <td>{{ mvt.compte }}</td>
+        <td>{{ mvt.tiers }}</td>
+        <td>{{ mvt.periode }}</td>
+        <td>{{ mvt.solde }}</td>
+       
+        <td>
+          <button type="button"
+                  class="btn btn-warning btn-sm js-update-book"
+                  data-url="{% url 'mvt_update' mvt.id %}">
+            <span class="glyphicon glyphicon-pencil"></span> Edit
+          </button>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="8" class="text-center bg-warning">Au aucun Tiers </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>

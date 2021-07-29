@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block javascript %}
+  <script src="{% static 'js/mvt.js' %}"></script>
+{% endblock %}
+{% block content %}
+  <h1 class="page-header">MVT</h1>
+  <p>
+    <button type="button"
+            class="btn btn-primary js-create-book"
+            data-url="{% url 'mvt_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+     Nouveau Compte
+    </button>
+
+    </p>
+  {% include 'mvt/liste_partiel_mvt.html' %}
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+{% endblock %}

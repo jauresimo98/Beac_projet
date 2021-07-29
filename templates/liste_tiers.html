@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block javascript %}
+  <script src="{% static 'js/tiers.js' %}"></script>
+{% endblock %}
+{% block content %}
+  <h1 class="page-header">Tiers</h1>
+  <p>
+    <button type="button"
+            class="btn btn-primary js-create-book"
+            data-url="{% url 'tiers_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      Nouveau Tiers
+    </button>
+
+  </p>
+  {% include 'tiers/liste_partiel_tiers.html' %}
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+<table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>centre</th>
+        <th>compte </th>
+        <th>tiers</th>
+        <th>description</th>
+        <th>destinataire</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for tiers in tires %}
+      <tr>
+        <td>{{ tiers.centre }}</td>
+        <td>{{ tiers.compte }}</td>
+        <td>{{ tiers.tiers }}</td>
+       
+        <td>
+          <button type="button"
+                  class="btn btn-warning btn-sm js-update-book"
+                  data-url="{% url 'tiers_update' tiers.id %}">
+            <span class="glyphicon glyphicon-pencil"></span> Edit
+          </button>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="8" class="text-center bg-warning">Au aucun Tiers </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
