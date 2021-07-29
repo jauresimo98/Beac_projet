@@ -238,5 +238,17 @@ def pdf_report_create(request):
     #return render(request,'template.html', context)
 
     return response
+def afficher_info(request):
+    if request.method=='POST':
+        compte = request.POST.get('numero')
+        tiers = request.POST.get('sign1')
+        jour = request.POST.get('sign2')
+        mois = request.POST.get('sign2')
+        annee = request.POST.get('sign2')
+        periode = jour + '' +mois + ''+ annee
+        mouvement = Mouvement.objects.filter(compte=compte,tiers=tiers,periode = periode)
+
+    return render(request, '')
+
 
 
