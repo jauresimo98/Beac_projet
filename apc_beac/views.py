@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.shortcuts import render
-
 from django.http import HttpResponse
 from .models import Mouvement,Tiers
 from django.shortcuts import render, redirect
@@ -110,6 +109,9 @@ def simple_upload(request):
 def periode(request):
     return render(request,'periode.html')
 
+def template(request):
+    return render(request,'template.html')
+
 
 def recupere_periode (request):
     data=dict()
@@ -119,8 +121,122 @@ def recupere_periode (request):
         G_mois = request.POST.get('mois')
         print(G_jour)
         print(G_mois)
+        request.session['G_jour']=request.POST.get('jour')
+        request.session['G_mois']=request.POST.get('mois')
 
     return  render(request,'input.html')
+def liste_mvt(request):
+    mvt = Mouvement.objects.all()
+    return render(request, 'liste_mvt.html', {'mvt': mvt})
+def save_mvt_form(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            books = Tiers.objects.all()
+            data['html_book_list'] = render_to_string('tiers/liste_partiel_mvt.html', {
+                'books': books
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
 
+
+def creer_mvt(request):
+    if request.method == 'POST':
+        form = MvtForm(request.POST)
+    else:
+        form = MvtForm()
+    return save_mvt_form(request, form, 'tieres/creer_partiel_mvt.html')
+
+
+def modifier_mvt(request, pk):
+    mvt = get_object_or_404(Mouvement, pk=pk)
+    if request.method == 'POST':
+        form = MvtForm(request.POST, instance=mvt)
+    else:
+        form = MvtForm(instance=mvt)
+    return save_mvt_form(request, form, 'tiers/update_partiel_mvt.html')
+
+
+def liste_tiers(request):
+    tiers = Tiers.objects.all()
+    return render(request, 'liste_tiers.html', {'tiers': tiers})
+
+
+
+def save_tiers_form(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            books = Tiers.objects.all()
+            data['html_book_list'] = render_to_string('tiers/liste_partiel_tiers.html', {
+                'books': books
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+
+def creer_tiers(request):
+    if request.method == 'POST':
+        form = TiersForm(request.POST)
+    else:
+        form = TiersForm()
+    return save_tiers_form(request, form, 'tieres/creer_partiel_tiers.html')
+
+
+def modifier_tiers(request, pk):
+    book = get_object_or_404(Tiers, pk=pk)
+    if request.method == 'POST':
+        form = TiersForm(request.POST, instance=book)
+    else:
+        form = TiersForm(instance=book)
+    return save_tiers_form(request, form, 'tiers/update_partiel_tiers.html')
+
+
+def pdf_report_create(request):
+    if request.method=='POST':
+        num = request.POST.get('numero')
+        dest1 = request.POST.get('sign1')
+        dest2 = request.POST.get('sign2')
+        print(num)
+        releve = ReleveCompte.objects.get(numero=num)
+        releve.signataire2=dest1
+        releve.signataire3=dest2
+        releve.save(update_fields=['signataire2','signataire3'])
+        nombrelettre=trad(releve.montant)    
+    template_path = 'template.html'
+    image = Image.objects.all()
+    context = {
+         'releve':releve,
+         'dest1':dest1,
+         'dest2':dest2,
+         'nombrelettre':nombrelettre,
+         'image':image
+
+         }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] =  'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    #return render(request,'template.html', context)
+
+    return response
 
 
