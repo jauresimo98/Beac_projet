@@ -240,5 +240,3 @@ def pdf_report_create(request):
     return response
 
 
-
-
