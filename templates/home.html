@@ -5,100 +5,103 @@
 <br>
 
 <div class="row">
-
 	<div class="col-md">
 		<div class="card card-body">
-			<h5>Compte:</h5>
+			<h5>Tiers:</h5>
 			<hr>
-			<form class="row g-3">
-                <div class="col-auto">
-                    <label for="inputTiers" class="visually-hidden">Tiers</label>
-                    <input type="text" class="form-control" id="inputTiers" placeholder="Tiers">
-                </div>
-                <div class="col-auto">
-                    <label class="visually-hidden">Periode</label>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                <option selected>Open this select menu</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                            </select>
-                            <label for="floatingSelectGrid">Choisir Jour</label>
-                        </div>
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                <option selected>Open this select menu</option>
-                                <option value="jan">jan</option>
-                                <option value="fev">fev</option>
-                                <option value="mar">mar</option>
-                            </select>
-                            <label for="floatingSelectGrid">Choisir Mois</label>
-                        </div>
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelectGrid">Choisir Annee</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Valider</button>
-                </div>
-            </form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Compte" aria-label="Compte">
+                    <span class="input-group-text"></span>
+                <input type="text" class="form-control" placeholder="Tiers" aria-label="Tiers">
+            </div>
+			<!-- <a class="btn btn-outline-info  btn-sm btn-block" href="">Tiers</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Periode</a> -->
+
 		</div>
 	</div>
 
 	<div class="col-md">
 		<div class="card card-body">
-			<h5>Description Compte</h5>
-            <p></p>
-			<p></p>
-            <hr>
-            <h1 style="text-align: center;padding: 10px"></h1>
+			<h5>Periode</h5>
+			<hr>
+			<div class="form-group">
+                <label> Jour </label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jour">
+                    <option selected>Votre choix </option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label> Mois </label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
+                    <option selected>Votre choix </option>
+                    <option value="Janvier">Janvier</option>
+                    <option value="Fevrier">Fevrier</option>
+                    <option value="Marc">Mars</option>
+                    <option value="Avril">Avril</option>
+                    <option value="Mai">Mai</option>
+                    <option value="Juin">Juin</option>
+                    <option value="Juillet">Juillet</option>
+                    <option value="Aout">Avril</option>
+                    <option value="Septembre">Avril</option>
+                    <option value="Octobre">Avril</option>
+                    <option value="Novembre">Avril</option>
+                    <option value="Decembre">Avril</option>
+                </select>
+          </div>
+          <div class="form-group">
+            <label> Annee </label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
+                <option selected>Votre choix </option>
+                <option value="Janvier">2021</option>
+                <option value="Fevrier">2020</option>
+                <option value="Marc">2019</option>
+                <option value="Avril">2018</option>
+            </select>
+          </div>
 		</div>
 	</div>
-
 	<div class="col-md">
 		<div class="card card-body">
 			<h5>Destinataire</h5>
-            <p></p>
-            <p></p>
 			<hr>
+            <p></p>
+			<p></p>
 			<h1 style="text-align: center;padding: 10px"></h1>
 		</div>
 	</div>
 </div>
 
+
 <br>
-<!-- <div class="row">
-	    <div class="col">
-		    <div class="card card-body">
-			    <form method="get">
-                    <button class="btn btn-primary" type="submit">Search</button>
-		        </form>
-		    </div>
-	    </div>
-    </div>
- -->
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+
+		    <button class="btn btn-primary" type="submit">Valider</button>
+		  </form>
+		</div>
+	</div>
+
+</div>
+<br>
+
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
 					<th>Tiers</th>
-					<th>Description Compte</th>
-					<th>Periode</th>
+					<th>Description</th>
 					<th>Solde</th>
-                    <th>Destinataire</th>
+					<th>Destinataire</th>
 				</tr>
-            </table>
+
+			</table>
 		</div>
 	</div>
 </div>
