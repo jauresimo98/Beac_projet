@@ -7,13 +7,22 @@ class Tiers(models.Model):
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
     destinataire =  models.CharField(max_length=254, null=True)
-    description  =  models.CharField(max_length=254, null=True)
+    description1  =  models.CharField(max_length=254, null=True)
+    description2  =  models.CharField(max_length=254, null=True)
+    description3  =  models.CharField(max_length=254, null=True)
+    description4  =  models.CharField(max_length=254, null=True)
+    description5  =  models.CharField(max_length=254, null=True)
+    description6  =  models.CharField(max_length=254, null=True)
+    description7  =  models.CharField(max_length=254, null=True)
 class Mouvement(models.Model):
     periode = models.CharField(max_length=254, null=True)
     solde = models.CharField(max_length=254, null=True)
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
+class Periode(models.Model):
+    mois =models.CharField(max_length=254, null=True)
+    jour =models.CharField(max_length=254, null=True)
 
 
 # class ReleveCompte(models.Model):

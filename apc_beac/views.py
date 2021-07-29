@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Mouvement,Tiers
+from .models import Mouvement,Tiers,Periode
 from django.shortcuts import render, redirect
 from datetime import datetime
 from django.http import FileResponse
@@ -42,8 +42,6 @@ Usage : voir les exemples, à la fin du script.
 Note : traduction franco-française, avec unités variables, orthographe géré, unités et centièmes.
 """
 num = 0
-G_mois = ''
-G_jour = ''
 
 def home (request):
     return render(request, 'home.html')
@@ -51,6 +49,7 @@ def home (request):
 
 
 def simple_upload(request):
+    
     solde_int = ''
     solde_int1 = ''
     solde = 0
@@ -59,6 +58,7 @@ def simple_upload(request):
     num_tiers1=0
     num_tiers2=''
     num_tiers=''
+    today = datetime.now()
     
     if request.method == 'POST':
         # person_resource = PersonneResource()
@@ -70,6 +70,7 @@ def simple_upload(request):
         montant = 0
         i = 0
         num = 0
+        periode2 =''
         
         num_compte = ''
         compte_int = ' '
@@ -86,20 +87,31 @@ def simple_upload(request):
                 solde_int1 = solde_int[:-4]
                 solde = int(solde_int1.replace(',',''))
                 #print(compte_int)
-                print(solde_int1.replace(',',''))
+                #print(solde_int1.replace(',',''))
                 #print(compte_int1[12:16])
                 num_tiers = str(compte_int)+''+compte_int1[12:16]
                 #print(num_tiers)
                 num_tiers1 = compte_int
                 num_tiers2 = compte_int1[12:16]
+                periode = Periode.objects.all()
+                for p in periode:
+                    #print(p.jour)
+                    periode2 = p.jour +' '+ p.mois+' '+str(today.year)
+
+               # periode2 = periode.jour +''+ periode.mois 
+                print(periode2)
+
+
                 mouvement= Mouvement(
                     solde = solde,
                     compte = num_tiers1,
                     tiers = num_tiers2,
-                    centre = 50
+                    centre = 50,
+                    periode = periode2
 
                 )
                 mouvement.save()
+                Periode.objects.all().delete()
 
                
 
@@ -115,16 +127,22 @@ def template(request):
 
 def recupere_periode (request):
     data=dict()
-    
+    print('recuperation')
     if request.method=='POST':
         G_jour = request.POST.get('jour')
         G_mois = request.POST.get('mois')
-        print(G_jour)
-        print(G_mois)
-        request.session['G_jour']=request.POST.get('jour')
-        request.session['G_mois']=request.POST.get('mois')
+        periode1 = Periode(
+            mois =  G_mois,
+            jour  = G_jour
+            
+        )
 
-    return  render(request,'input.html')
+        periode1.save()
+        
+        #redirect('recupere_periode')
+       
+
+    return redirect('input')
 def liste_mvt(request):
     mvt = Mouvement.objects.all()
     return render(request, 'liste_mvt.html', {'mvt': mvt})
