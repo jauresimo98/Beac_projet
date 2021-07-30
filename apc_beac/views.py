@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Mouvement,Tiers
+from .models import Mouvement,Tiers,Periode
 from django.shortcuts import render, redirect
 from datetime import datetime
 from django.http import FileResponse
@@ -9,7 +9,6 @@ import io
 from io import BytesIO
 from django.contrib import messages
 from tablib import Dataset
-import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from django.template.loader import get_template
@@ -18,10 +17,13 @@ from django.http import HttpResponse
 from django.views import View
 import xhtml2pdf.pisa as pisa
 import uuid
+from django.core.paginator import Paginator
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from reste_framework.authtoken.models import Token
 
@@ -42,8 +44,6 @@ Usage : voir les exemples, à la fin du script.
 Note : traduction franco-française, avec unités variables, orthographe géré, unités et centièmes.
 """
 num = 0
-G_mois = ''
-G_jour = ''
 
 def home (request):
     mvt = Mouvement.objects.all()
@@ -53,6 +53,7 @@ def home (request):
 
 
 def simple_upload(request):
+    
     solde_int = ''
     solde_int1 = ''
     solde = 0
@@ -61,6 +62,7 @@ def simple_upload(request):
     num_tiers1=0
     num_tiers2=''
     num_tiers=''
+    today = datetime.now()
     
     if request.method == 'POST':
         # person_resource = PersonneResource()
@@ -72,6 +74,7 @@ def simple_upload(request):
         montant = 0
         i = 0
         num = 0
+        periode2 =''
         
         num_compte = ''
         compte_int = ' '
@@ -88,24 +91,101 @@ def simple_upload(request):
                 solde_int1 = solde_int[:-4]
                 solde = int(solde_int1.replace(',',''))
                 #print(compte_int)
-                print(solde_int1.replace(',',''))
+                #print(solde_int1.replace(',',''))
                 #print(compte_int1[12:16])
                 num_tiers = str(compte_int)+''+compte_int1[12:16]
                 #print(num_tiers)
                 num_tiers1 = compte_int
                 num_tiers2 = compte_int1[12:16]
+                periode = Periode.objects.all()
+                for p in periode:
+                    #print(p.jour)
+                    periode2 = p.jour +' '+ p.mois+' '+str(today.year)
+
+               # periode2 = periode.jour +''+ periode.mois 
+                print(periode2)
+
+
                 mouvement= Mouvement(
                     solde = solde,
                     compte = num_tiers1,
                     tiers = num_tiers2,
-                    centre = 50
+                    centre = 50,
+                    periode = periode2
 
                 )
                 mouvement.save()
+                Periode.objects.all().delete()
 
                
 
     return render(request, 'input.html')
+
+
+
+
+# def simple_upload(request):
+    
+#     solde_int = ''
+#     solde_int1 = ''
+#     solde = 0
+#     code_compte= ''
+#     periode = ' '
+#     num_tiers1=0
+#     num_tiers2=''
+#     num_tiers=''
+#     today = datetime.now()
+    
+#     if request.method == 'POST':
+#         # person_resource = PersonneResource()
+#         dataset = Dataset()
+#         new_persons = request.FILES['myfile']
+
+#         imported_data = dataset.load(new_persons.read(), format='xlsx')
+#         # print(imported_data)
+#         montant = 0
+#         i = 0
+#         num = 0
+#         periode2 =''
+        
+#         num_compte = ''
+#         compte_int = ' '
+#         compte_int1 = ' '
+
+#         for data in imported_data:
+#             print(data[10])
+#             tiers = Tiers(
+#                 centre = data[0],
+#                 compte = data[1],
+#                 tiers  = data[2],
+#                 destinataire = data[3],
+#                 description1 = data[4],
+#                 description2 = data[5],
+#                 description3 = data[6],
+#                 description4 = data[7],
+#                 description5 = data[8],
+#                 description6 = data[9],
+#                 description7 = data[10]
+#             )
+
+#             tiers.save()
+          
+
+
+#                 # mouvement= Mouvement(
+#                 #     solde = solde,
+#                 #     compte = num_tiers1,
+#                 #     tiers = num_tiers2,
+#                 #     centre = 50,
+#                 #     periode = periode2
+
+#                 # )
+#                 # mouvement.save()
+#                 # Periode.objects.all().delete()
+
+               
+
+#     return render(request, 'input.html')
 
 
 def periode(request):
@@ -117,19 +197,36 @@ def template(request):
 
 def recupere_periode (request):
     data=dict()
-    
+    print('recuperation')
     if request.method=='POST':
         G_jour = request.POST.get('jour')
         G_mois = request.POST.get('mois')
-        print(G_jour)
-        print(G_mois)
-        request.session['G_jour']=request.POST.get('jour')
-        request.session['G_mois']=request.POST.get('mois')
+        periode1 = Periode(
+            mois =  G_mois,
+            jour  = G_jour
+            
+        )
 
-    return  render(request,'input.html')
+        periode1.save()
+        
+        #redirect('recupere_periode')
+       
+
+    return redirect('input')
 def liste_mvt(request):
     mvt = Mouvement.objects.all()
-    return render(request, 'liste_mvt.html', {'mvt': mvt})
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(mvt, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+
+    return render(request, 'liste_mvt.html', {'users': users,'periode':periode})
 def save_mvt_form(request, form, template_name):
     data = dict()
     if request.method == 'POST':
@@ -254,4 +351,16 @@ def afficher_info(request):
     return render(request, '')
 
 
+def liste_user(request):
+    user_list = Users.objects.all()
+    page = request.GET.get('page', 1)
 
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'liste_user.html', { 'users': users })

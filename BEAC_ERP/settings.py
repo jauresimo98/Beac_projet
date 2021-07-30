@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apc_beac',
     'django_filters',
+    'users.apps.UsersConfig',
+     'crispy_forms',
+     'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -134,7 +137,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
-LOGIN_REDIRECT_URL = reverse_lazy("infosignataire")
+LOGIN_REDIRECT_URL = reverse_lazy("home")
 LOGOUT_REDIRECT_URL = reverse_lazy("login")
 
 

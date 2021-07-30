@@ -9,6 +9,15 @@ class Tiers(models.Model):
     def __str__(self):
         return self.tiers
 
+    destinataire =  models.CharField(max_length=254, null=True)
+    description1  =  models.CharField(max_length=254, null=True)
+    description2  =  models.CharField(max_length=254, null=True)
+    description3  =  models.CharField(max_length=254, null=True)
+    description4  =  models.CharField(max_length=254, null=True)
+    description5  =  models.CharField(max_length=254, null=True)
+    description6  =  models.CharField(max_length=254, null=True)
+    description7  =  models.CharField(max_length=254, null=True)
+
 class Mouvement(models.Model):
     numero = models.ForeignKey(Tiers, null = True, on_delete = models.SET_NULL)
     periode = models.CharField(max_length=254, null=True)
@@ -16,6 +25,10 @@ class Mouvement(models.Model):
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
+
+class Periode(models.Model):
+    mois =models.CharField(max_length=254, null=True)
+    jour =models.CharField(max_length=254, null=True)
 
     def __str__(self):
         return self.tiers
@@ -29,11 +42,3 @@ class Mouvement(models.Model):
 #     signataire1 = models.CharField(max_length=254, null=True)
 #     signataire2 = models.CharField(max_length=254, null=True)
 #     signataire3 = models.CharField(max_length=254, null=True)
-
-
-# class Image(models.Model):
-#     image = models.ImageField(upload_to='static/images/')
-
-# Create your models here.
-
-# Create your models here.

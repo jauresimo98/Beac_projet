@@ -17,5 +17,6 @@ urlpatterns = [
     path('tiers/ADD/', views.creer_tiers, name='tiers_create'),
     path('tiers/(?P<pk>\d+)/update/$', views.modifier_tiers, name='tiers_update'),
     path('create-pdf', views.pdf_report_create,name='create-pdf'),
+    path('liste_user', views.liste_user,name='liste_user'),
 
 ]
