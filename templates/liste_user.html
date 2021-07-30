@@ -1,23 +1,27 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
-{% block javascript %}
-  <script src="{% static 'js/mvt.js' %}"></script>
-{% endblock %}
+
+
 {% block content %}
-  <h1 class="page-header">MVT {{periode}}</h1>
-  <p>
-    <button type="button"
-            class="btn btn-primary js-create-book"
-            data-url="{% url 'mvt_create' %}">
-      <span class="glyphicon glyphicon-plus"></span>
-     Nouveau Compte
-    </button>
-
-    </p>
-  {% include 'mvt/liste_partiel_mvt.html' %}
-      
-
-    {% if users.has_other_pages %}
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.centre }}</td>
+          <td>{{ user.compte }}</td>
+          <td>{{ user.tiers }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {% if users.has_other_pages %}
     <ul class="pagination">
       {% if users.has_previous %}
         <li><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
@@ -38,4 +42,5 @@
       {% endif %}
     </ul>
   {% endif %}
-{% endblock %}
+
+  {% endblock %}

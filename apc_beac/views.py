@@ -9,7 +9,6 @@ import io
 from io import BytesIO
 from django.contrib import messages
 from tablib import Dataset
-import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from django.template.loader import get_template
@@ -18,10 +17,13 @@ from django.http import HttpResponse
 from django.views import View
 import xhtml2pdf.pisa as pisa
 import uuid
+from django.core.paginator import Paginator
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from reste_framework.authtoken.models import Token
 
@@ -118,6 +120,72 @@ def simple_upload(request):
     return render(request, 'input.html')
 
 
+
+
+# def simple_upload(request):
+    
+#     solde_int = ''
+#     solde_int1 = ''
+#     solde = 0
+#     code_compte= ''
+#     periode = ' '
+#     num_tiers1=0
+#     num_tiers2=''
+#     num_tiers=''
+#     today = datetime.now()
+    
+#     if request.method == 'POST':
+#         # person_resource = PersonneResource()
+#         dataset = Dataset()
+#         new_persons = request.FILES['myfile']
+
+#         imported_data = dataset.load(new_persons.read(), format='xlsx')
+#         # print(imported_data)
+#         montant = 0
+#         i = 0
+#         num = 0
+#         periode2 =''
+        
+#         num_compte = ''
+#         compte_int = ' '
+#         compte_int1 = ' '
+
+#         for data in imported_data:
+#             print(data[10])
+#             tiers = Tiers(
+#                 centre = data[0],
+#                 compte = data[1],
+#                 tiers  = data[2],
+#                 destinataire = data[3],
+#                 description1 = data[4],
+#                 description2 = data[5],
+#                 description3 = data[6],
+#                 description4 = data[7],
+#                 description5 = data[8],
+#                 description6 = data[9],
+#                 description7 = data[10]
+#             )
+
+#             tiers.save()
+          
+
+
+#                 # mouvement= Mouvement(
+#                 #     solde = solde,
+#                 #     compte = num_tiers1,
+#                 #     tiers = num_tiers2,
+#                 #     centre = 50,
+#                 #     periode = periode2
+
+#                 # )
+#                 # mouvement.save()
+#                 # Periode.objects.all().delete()
+
+               
+
+#     return render(request, 'input.html')
+
+
 def periode(request):
     return render(request,'periode.html')
 
@@ -145,7 +213,18 @@ def recupere_periode (request):
     return redirect('input')
 def liste_mvt(request):
     mvt = Mouvement.objects.all()
-    return render(request, 'liste_mvt.html', {'mvt': mvt})
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(mvt, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+
+    return render(request, 'liste_mvt.html', {'users': users,'periode':periode})
 def save_mvt_form(request, form, template_name):
     data = dict()
     if request.method == 'POST':
@@ -269,4 +348,16 @@ def afficher_info(request):
     return render(request, '')
 
 
+def liste_user(request):
+    user_list = Users.objects.all()
+    page = request.GET.get('page', 1)
 
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'liste_user.html', { 'users': users })

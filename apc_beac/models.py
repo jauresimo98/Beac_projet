@@ -33,11 +33,3 @@ class Periode(models.Model):
 #     signataire1 = models.CharField(max_length=254, null=True)
 #     signataire2 = models.CharField(max_length=254, null=True)
 #     signataire3 = models.CharField(max_length=254, null=True)
-
-
-# class Image(models.Model):
-#     image = models.ImageField(upload_to='static/images/')
-
-# Create your models here.
-
-# Create your models here.
