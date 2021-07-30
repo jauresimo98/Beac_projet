@@ -315,18 +315,39 @@ def pdf_report_create(request):
         mouvement = Mouvement.objects.filter(compte=int(compte), tiers=tiers, periode=periode)
         tiers_table = Tiers.objects.filter(compte=int(compte), tiers=tiers)
         for t in tiers_table:
-            print(t.destinataire)
+            dest =t.destinataire
+            desc1 = t.description1
+            desc2 = t.description2
+            desc3 = t.description3
+            desc4 = t.description4
+            desc5 = t.description5
+            desc6 = t.description6
+            desc7 = t.description7
+            desc = t.description
         #mouvement = Mouvement.objects.all()
         for mvt in mouvement:
             print(mvt.compte)
             print(mvt.solde)
+            
         #print(mouvement.compte)
         #releve = ReleveCompte.objects.get(numero=num)
        
     template_path = 'template.html'
     context = {
          'mouvement': mouvement,
-         'tiers_table':tiers_table
+         'tiers_table':tiers_table,
+         'dest':dest,
+         'desc1':desc1,
+          'desc2':desc2,
+          'desc3':desc3,
+          'desc4':desc4,
+          'desc5':desc5,
+          'desc6':desc6,
+          'desc7':desc7,
+          'desc':desc,
+          
+          
+    
 
          }
     # Create a Django response object, and specify content_type as pdf

@@ -29,7 +29,30 @@
                 </td>
                 <td  with="500" style="width:500px; vertical-align: top;">
                     Libreville, le<br/><br/><br/><br/><br/>
-                    <b style="font-size: 13px;">&nbsp &nbsp  {{releve.nomDestinataire}} ,</b>  <br/><br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{dest}} </b>  <br/><br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{desc1}} </b>  <br/><br/>
+                    {%if desc2 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc2}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc3 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc3}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc4 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc4}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc5 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc5}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc6 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc6}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc7 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc7}} </b>  <br/><br/>
+                     {%endif%}
+                     {%if desc != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc}} </b>  <br/><br/>
+                     {%endif%}
+                    
                    <b><u>LIBREVILLE</u></b>  
                 </td>
             </tr>
@@ -40,10 +63,10 @@
         <div style="padding: 20px; margin: 2px; font-size: 13px; ">
            
             <td>N° ____________/SCOF/2021</td><br>
-            <td><strong>Objet</strong> :  Relevé de votre compte N° 50 331101 {{releve.numero}} </br>
+            <td><strong>Objet</strong> :  Relevé de votre compte  {{releve.numero}} </br>
                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp du <strong>  1<sup>er</sup> </strong> au <strong> 31 janvier </strong></br></br>
                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{releve.nomDestinataire}} ,</br></br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <strong>  N° 50 331101 {{releve.numero}}  </strong> 
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <strong>  N°  {{releve.numero}}  </strong> 
                     dans nos livres arrêté en capitaux au 31 janvier 2021, présentant un solde ???créditeur de Francs CFA <strong> {{releve.montant}} </strong> </br> 
                     <strong> ( {{nombrelettre}}). </strong></td><br>
              </br>
