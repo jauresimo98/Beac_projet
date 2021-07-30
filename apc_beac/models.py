@@ -6,9 +6,6 @@ class Tiers(models.Model):
     tiers = models.CharField(max_length=254, null=True)
     destinataire = models.CharField(max_length=254, null=True)
     description = models.CharField(max_length=254, null=True)
-    def __str__(self):
-        return self.tiers
-
     destinataire =  models.CharField(max_length=254, null=True)
     description1  =  models.CharField(max_length=254, null=True)
     description2  =  models.CharField(max_length=254, null=True)
@@ -17,6 +14,10 @@ class Tiers(models.Model):
     description5  =  models.CharField(max_length=254, null=True)
     description6  =  models.CharField(max_length=254, null=True)
     description7  =  models.CharField(max_length=254, null=True)
+
+    def __str__(self):
+        return self.tiers
+
 
 class Mouvement(models.Model):
     numero = models.ForeignKey(Tiers, null = True, on_delete = models.SET_NULL)

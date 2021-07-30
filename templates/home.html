@@ -5,14 +5,16 @@
 <br>
 
 <div class="row">
+ <form action="{% url 'create-pdf' %}" method="POST">
+    {% csrf_token %}
 	<div class="col-md">
 		<div class="card card-body">
 			<h5>Tiers:</h5>
 			<hr>
             <div class="input-group mb-3">
-                <input type="text" name="Compte" class="form-control" placeholder="Compte" aria-label="Compte">
+                <input type="text" name="compte" class="form-control" placeholder="compte" aria-label="Compte">
                     <span class="input-group-text"></span>
-                <input type="text" name="Tiers" class="form-control" placeholder="Tiers" aria-label="Tiers">
+                <input type="text" name="tiers" class="form-control" placeholder="tiers" aria-label="Tiers">
             </div>
 			<!-- <a class="btn btn-outline-info  btn-sm btn-block" href="">Tiers</a>
 			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Periode</a> -->
@@ -26,7 +28,7 @@
 			<hr>
 			<div class="form-group">
                 <label> Jour </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="Jour">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jour">
                     <option selected>Votre choix </option>
                     <option value="28">28</option>
                     <option value="29">29</option>
@@ -36,10 +38,10 @@
             </div>
             <div class="form-group">
                 <label> Mois </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="Mois">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
                     <option selected>Votre choix </option>
                     <option value="Janvier">Janvier</option>
-                    <option value="Fevrier">Fevrier</option>
+                    <option value="Février">Février</option>
                     <option value="Marc">Mars</option>
                     <option value="Avril">Avril</option>
                     <option value="Mai">Mai</option>
@@ -54,7 +56,7 @@
           </div>
           <div class="form-group">
             <label> Annee </label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="Annee">
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="annee">
                 <option selected>Votre choix </option>
                 <option value="2021">2021</option>
                 <option value="2020">2020</option>
@@ -80,17 +82,15 @@
 <div class="row">
 	<div class="col">
 		<div class="card card-body">
-			<form method="get">
-
 		    <button class="btn btn-primary" type="submit">Valider</button>
-		  </form>
 		</div>
 	</div>
 
 </div>
+</form>
 <br>
 
-<div class="row">
+<!--<div class="row">
 	<div class="col-md">
 		<div class="card card-body">
 			<table class="table table-sm">
@@ -108,6 +108,7 @@
 			</table>
 		</div>
 	</div>
-</div>
+
+</div>-->
 
 {% endblock %}

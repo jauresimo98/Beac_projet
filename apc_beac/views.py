@@ -47,7 +47,7 @@ num = 0
 
 def home (request):
     mvt = Mouvement.objects.all()
-    context = {'Mouvement': Mouvement }
+    context = {'mvt': mvt }
     return render(request, 'home.html', context)
 
 
@@ -74,7 +74,7 @@ def simple_upload(request):
         montant = 0
         i = 0
         num = 0
-        periode2 =''
+        periode2 =''  
         
         num_compte = ''
         compte_int = ' '
@@ -303,11 +303,59 @@ def modifier_tiers(request, pk):
 
 def pdf_report_create(request):
     if request.method=='POST':
-        num = request.POST.get('numero')
-        dest1 = request.POST.get('sign1')
-        dest2 = request.POST.get('sign2')
+        compte = request.POST.get('compte')
+        tiers = request.POST.get('tiers')
+        jour = request.POST.get('jour')
+        mois = request.POST.get('mois')
+        annee = request.POST.get('annee')
+        #print(type(compte))
+        #print(tiers)
+        #print(annee)
+        periode = jour +' '+mois+ ' '+ annee
+        mouvement = Mouvement.objects.filter(compte=int(compte), tiers=tiers, periode=periode)
+        tiers_table = Tiers.objects.filter(compte=int(compte), tiers=tiers)
+        for t in tiers_table:
+            print(t.destinataire)
+        #mouvement = Mouvement.objects.all()
+        for mvt in mouvement:
+            print(mvt.compte)
+            print(mvt.solde)
+        #print(mouvement.compte)
+        #releve = ReleveCompte.objects.get(numero=num)
+       
+    template_path = 'template.html'
+    context = {
+         'mouvement': mouvement,
+         'tiers_table':tiers_table
+
+         }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] =  'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    #return render(request,'template.html', context)
+
+    return response
+
+def pdf_report_create1(request):
+    if request.method=='POST':
+        compte = request.POST.get('compte')
+        tiers = request.POST.get('tiers')
+        jour = request.POST.get('jour')
+        mois = request.POST.get('mois')
+        annee = request.POST.get('annee')
+        periode = jour +' '+mois+ ' '+ annee
+        mouvement = Mouvement.objects.filter(compte=compte, tiers=tiers, periode=periode)
         print(num)
-        releve = ReleveCompte.objects.get(numero=num)
+        #releve = ReleveCompte.objects.get(numero=num)
         releve.signataire2=dest1
         releve.signataire3=dest2
         releve.save(update_fields=['signataire2','signataire3'])
