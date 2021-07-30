@@ -1,19 +1,24 @@
 from django.db import models
 
-from django.db import models
-
 class Tiers(models.Model):
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
-    destinataire =  models.CharField(max_length=254, null=True)
-    description  =  models.CharField(max_length=254, null=True)
+    destinataire = models.CharField(max_length=254, null=True)
+    description = models.CharField(max_length=254, null=True)
+    def __str__(self):
+        return self.tiers
+
 class Mouvement(models.Model):
+    numero = models.ForeignKey(Tiers, null = True, on_delete = models.SET_NULL)
     periode = models.CharField(max_length=254, null=True)
     solde = models.CharField(max_length=254, null=True)
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
+
+    def __str__(self):
+        return self.tiers
 
 
 # class ReleveCompte(models.Model):

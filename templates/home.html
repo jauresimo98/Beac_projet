@@ -10,9 +10,9 @@
 			<h5>Tiers:</h5>
 			<hr>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Compte" aria-label="Compte">
+                <input type="text" name="Compte" class="form-control" placeholder="Compte" aria-label="Compte">
                     <span class="input-group-text"></span>
-                <input type="text" class="form-control" placeholder="Tiers" aria-label="Tiers">
+                <input type="text" name="Tiers" class="form-control" placeholder="Tiers" aria-label="Tiers">
             </div>
 			<!-- <a class="btn btn-outline-info  btn-sm btn-block" href="">Tiers</a>
 			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Periode</a> -->
@@ -26,7 +26,7 @@
 			<hr>
 			<div class="form-group">
                 <label> Jour </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jour">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="Jour">
                     <option selected>Votre choix </option>
                     <option value="28">28</option>
                     <option value="29">29</option>
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label> Mois </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="Mois">
                     <option selected>Votre choix </option>
                     <option value="Janvier">Janvier</option>
                     <option value="Fevrier">Fevrier</option>
@@ -45,21 +45,21 @@
                     <option value="Mai">Mai</option>
                     <option value="Juin">Juin</option>
                     <option value="Juillet">Juillet</option>
-                    <option value="Aout">Avril</option>
-                    <option value="Septembre">Avril</option>
-                    <option value="Octobre">Avril</option>
-                    <option value="Novembre">Avril</option>
-                    <option value="Decembre">Avril</option>
+                    <option value="Aout">Aout</option>
+                    <option value="Septembre">Septembre</option>
+                    <option value="Octobre">Octobre</option>
+                    <option value="Novembre">Novembre</option>
+                    <option value="Decembre">Decembre</option>
                 </select>
           </div>
           <div class="form-group">
             <label> Annee </label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="Annee">
                 <option selected>Votre choix </option>
-                <option value="Janvier">2021</option>
-                <option value="Fevrier">2020</option>
-                <option value="Marc">2019</option>
-                <option value="Avril">2018</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
             </select>
           </div>
 		</div>
@@ -100,6 +100,10 @@
 					<th>Solde</th>
 					<th>Destinataire</th>
 				</tr>
+                {% for mvt in Mouvement %}
+                    <th>{{mvt.tiers}}</th>
+                    <th>{{mvt.solde}}</th>
+                {% endfor %}
 
 			</table>
 		</div>

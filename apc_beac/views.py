@@ -46,7 +46,9 @@ G_mois = ''
 G_jour = ''
 
 def home (request):
-    return render(request, 'home.html')
+    mvt = Mouvement.objects.all()
+    context = {'Mouvement': Mouvement }
+    return render(request, 'home.html', context)
 
 
 
@@ -238,13 +240,14 @@ def pdf_report_create(request):
     #return render(request,'template.html', context)
 
     return response
+
 def afficher_info(request):
     if request.method=='POST':
-        compte = request.POST.get('numero')
-        tiers = request.POST.get('sign1')
-        jour = request.POST.get('sign2')
-        mois = request.POST.get('sign2')
-        annee = request.POST.get('sign2')
+        compte = request.POST.get('Compte')
+        tiers = request.POST.get('Tiers')
+        jour = request.POST.get('Jour')
+        mois = request.POST.get('Mois')
+        annee = request.POST.get('Annee')
         periode = jour + '' +mois + ''+ annee
         mouvement = Mouvement.objects.filter(compte=compte,tiers=tiers,periode = periode)
 
