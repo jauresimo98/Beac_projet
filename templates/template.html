@@ -49,9 +49,7 @@
                      {%if desc7 != None%}
                      <b style="font-size: 13px;">&nbsp &nbsp  {{desc7}} </b>  <br/><br/>
                      {%endif%}
-                     {%if desc != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc}} </b>  <br/><br/>
-                     {%endif%}
+                     
                     
                    <b><u>LIBREVILLE</u></b>  
                 </td>
@@ -63,18 +61,18 @@
         <div style="padding: 20px; margin: 2px; font-size: 13px; ">
            
             <td>N° ____________/SCOF/2021</td><br>
-            <td><strong>Objet</strong> :  Relevé de votre compte  {{releve.numero}} </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp du <strong>  1<sup>er</sup> </strong> au <strong> 31 janvier </strong></br></br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{releve.nomDestinataire}} ,</br></br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <strong>  N°  {{releve.numero}}  </strong> 
-                    dans nos livres arrêté en capitaux au 31 janvier 2021, présentant un solde ???créditeur de Francs CFA <strong> {{releve.montant}} </strong> </br> 
+            <td><strong>Objet</strong> :  Relevé de votre compte  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}}</br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp du <strong>  1<sup>er</sup> </strong> au <strong> {{periode_mvt}} </strong></br></br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{dest}} ,</br></br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <strong>  N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}}  </strong> 
+                    dans nos livres arrêté en capitaux au{{periode}}, présentant un solde {%if sol != 'p' %} debiteur{%else%}créditeur{%endif%} de Francs CFA <strong> {{solde_mvt}} </strong> 
                     <strong> ( {{nombrelettre}}). </strong></td><br>
              </br>
             
                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Sans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l'ensemble des écritures de votre relevé ainsi que 
                 le solde arrêté du mois seront considérés comme approuves et ne pourront plus faire l'objet de réclamation.</br> </br>
                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouve ci-joint. </br> </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Veuillez agréer, {{releve.nomDestinataire}},     l'expression de ma parfaite considération.</br> </br>   
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Veuillez agréer,  {{dest}},     l'expression de ma parfaite considération.</br> </br>   
         
         <table>
 

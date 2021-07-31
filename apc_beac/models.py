@@ -20,7 +20,6 @@ class Tiers(models.Model):
 
 
 class Mouvement(models.Model):
-    numero = models.ForeignKey(Tiers, null = True, on_delete = models.SET_NULL)
     periode = models.CharField(max_length=254, null=True)
     solde = models.CharField(max_length=254, null=True)
     compte= models.IntegerField(blank=True,null=True)
@@ -31,8 +30,7 @@ class Periode(models.Model):
     mois =models.CharField(max_length=254, null=True)
     jour =models.CharField(max_length=254, null=True)
 
-    def __str__(self):
-        return self.tiers
+    
 
 
 # class ReleveCompte(models.Model):

@@ -104,6 +104,7 @@ def simple_upload(request):
 
                # periode2 = periode.jour +''+ periode.mois 
                 print(periode2)
+    
 
 
                 mouvement= Mouvement(
@@ -302,54 +303,56 @@ def modifier_tiers(request, pk):
 
 
 def pdf_report_create(request):
+    sol = 'p' 
     if request.method=='POST':
         compte = request.POST.get('compte')
         tiers = request.POST.get('tiers')
         jour = request.POST.get('jour')
         mois = request.POST.get('mois')
         annee = request.POST.get('annee')
-        #print(type(compte))
-        #print(tiers)
-        #print(annee)
-        periode = jour +' '+mois+ ' '+ annee
-        mouvement = Mouvement.objects.filter(compte=int(compte), tiers=tiers, periode=periode)
+        periode1 = jour +' '+mois+ ' '+ annee
+        mouvement = Mouvement.objects.filter(compte=int(compte), tiers=tiers, periode=periode1)
+        for mouv in mouvement:
+            tiers_mvt=mouv.tiers
+            compte_mvt=mouv.compte
+            periode_mvt =mouv.periode
+            centre_mvt = mouv.centre
+            solde_mvt = mouv.solde
+            print(type(solde_mvt ))
+            solde_teste = int(solde_mvt)
+            if solde_teste<0:
+                sol ='n'
+            nombrelettre=trad(int(solde_mvt))
+            
         tiers_table = Tiers.objects.filter(compte=int(compte), tiers=tiers)
         for t in tiers_table:
-            dest =t.destinataire
+            dest  = t.destinataire
             desc1 = t.description1
             desc2 = t.description2
             desc3 = t.description3
             desc4 = t.description4
             desc5 = t.description5
             desc6 = t.description6
-            desc7 = t.description7
-            desc = t.description
-        #mouvement = Mouvement.objects.all()
-        for mvt in mouvement:
-            print(mvt.compte)
-            print(mvt.solde)
-            
-        #print(mouvement.compte)
-        #releve = ReleveCompte.objects.get(numero=num)
-       
+            desc7 = t.description7 
+                             
     template_path = 'template.html'
     context = {
-         'mouvement': mouvement,
-         'tiers_table':tiers_table,
          'dest':dest,
          'desc1':desc1,
-          'desc2':desc2,
-          'desc3':desc3,
-          'desc4':desc4,
-          'desc5':desc5,
-          'desc6':desc6,
-          'desc7':desc7,
-          'desc':desc,
-          
-          
+         'desc2':desc2,
+         'desc3':desc3,
+         'desc4':desc4,
+         'desc5':desc5,
+         'desc6':desc6,
+         'desc7':desc7,
+         'nombrelettre' : nombrelettre,
+         'centre_mvt':centre_mvt,
+         'compte_mvt':compte_mvt,
+         'tiers_mvt':tiers_mvt,
+         'periode_mvt': periode_mvt,
+         'solde_mvt':solde_mvt,
+         'sol':sol   }
     
-
-         }
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] =  'filename="report.pdf"'
@@ -433,3 +436,100 @@ def liste_user(request):
         users = paginator.page(paginator.num_pages)
 
     return render(request, 'liste_user.html', { 'users': users })
+
+
+def tradd(num):
+    global t1,t2
+    ch=''
+    if num==0 :
+        ch=''
+    elif num<20:
+        ch=t1[num]
+    elif num>=20:
+        if (num>=70 and num<=79)or(num>=90):
+            z=int(num/10)-1
+        else:
+            z=int(num/10)
+        ch=t2[z]
+        num=num-z*10
+        if (num==1 or num==11) and z<8:
+            ch=ch+' et'
+        if num>0:
+            ch=ch+' '+tradd(num)
+        else:
+            ch=ch+tradd(num)
+    return ch
+
+
+def tradn(num):
+    global t1,t2
+    ch=''
+    flagcent=False
+    if num>=1000000000:
+        z=int(num/1000000000)
+        ch=ch+tradn(z)+' milliard'
+        if z>1:
+            ch=ch+'s'
+        num=num-z*1000000000
+    if num>=1000000:
+        z=int(num/1000000)
+        ch=ch+tradn(z)+' million'
+        if z>1:
+            ch=ch+'s'
+        num=num-z*1000000
+    if num>=1000:
+        if num>=100000:
+            z=int(num/100000)
+            if z>1:
+                ch=ch+' '+tradd(z)
+            ch=ch+' cent'
+            flagcent=True
+            num=num-z*100000
+            if int(num/1000)==0 and z>1:
+                ch=ch+'s'
+        if num>=1000:
+            z=int(num/1000)
+            if (z==1 and flagcent) or z>1:
+                ch=ch+' '+tradd(z)
+            num=num-z*1000
+        ch=ch+' mille'
+    if num>=100:
+        z=int(num/100)
+        if z>1:
+            ch=ch+' '+tradd(z)
+        ch=ch+" cent"
+        num=num-z*100
+        if num==0 and z>1:
+           ch=ch+'s'
+    if num>0:
+        ch=ch+" "+tradd(num)
+    return ch
+
+
+def trad(nb, unite=" ", decim="centime"):
+    global t1,t2
+    nb=round(nb,2)
+    t1=["","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"]
+    t2=["","dix","vingt","trente","quarante","cinquante","soixante","septante","quatre-vingt","nonante"]
+    z1=int(nb)
+    z3=(nb-z1)*100
+    z2=int(round(z3,0))
+    if z1==0:
+        ch="zéro"
+    else:
+        ch=tradn(abs(z1))
+    if z1>1 or z1<-1:
+        if unite!='':
+            ch=ch+" "+unite+'s'
+    else:
+        ch=ch+" "+unite
+    if z2>0:
+        ch=ch+tradn(z2)
+        if z2>1 or z2<-1:
+            if decim!='':
+                ch=ch+" "+decim+'s'
+        else:
+            ch=ch+" "+decim
+    if nb<0:
+        ch="moins "+ch
+    return ch
