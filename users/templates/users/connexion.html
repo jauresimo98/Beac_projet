@@ -8,14 +8,18 @@
        
         <div class="container">
             <div class="col-md-12 mt-50">
-               
+                {%if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger text-center "><strong>{{message}}</strong></div>
+                {%endfor%}
+                {%endif%}
                 <form action="" method="POST">
                     {% csrf_token %}
                     <div class="card">
-                      
-                        <div class="card-header text-center"><h2> <i class="fas fa-user"></i> Creation de compte </h2> </div>
+                        <div class="card-header text-center"><h2> <i class="fas fa-user"></i> Connexion  </h2> </div>
                         <div class="card-body">
-                            {{form}}
+                            <input type="text" placeholder="Nom Utilisateur" name="nom" class="form-control mb-2" required>
+                            <input type="password" placeholder="Mot de passe" name="pwd"  class="form-control" re>
                         </div>
                         <div class="card-footer"> 
                             <button class="btn btn-primary btn-block">Se connecter</button>
@@ -26,6 +30,7 @@
                 </div>  
             </div>
             
-        
+       
+            
     
 {% endblock %}

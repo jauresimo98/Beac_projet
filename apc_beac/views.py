@@ -24,6 +24,9 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import *
+from django.views.generic.edit import UpdateView,CreateView,DeleteView
+from django.contrib.auth.decorators import login_required
 
 # from reste_framework.authtoken.models import Token
 
@@ -44,14 +47,32 @@ Usage : voir les exemples, à la fin du script.
 Note : traduction franco-française, avec unités variables, orthographe géré, unités et centièmes.
 """
 num = 0
+#@login_required
+class AddTiers(CreateView):
+    model = Tiers
+    form_class = TiersForm
+    template_name = 'add_tiers.html'
+    success_url = 'tiers'
 
+    def form_is_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+#@login_required
+class UpdateTiers(UpdateView):
+    model = Tiers
+    form_class = TiersForm
+    template_name = 'form_tiers.html'
+    success_url = '/apc_beac/tiers'
+
+@login_required
 def home (request):
     mvt = Mouvement.objects.all()
     context = {'mvt': mvt }
     return render(request, 'home.html', context)
 
 
-
+@login_required
 def simple_upload(request):
     
     solde_int = ''
@@ -188,14 +209,14 @@ def simple_upload(request):
 
 #     return render(request, 'input.html')
 
-
+@login_required
 def periode(request):
     return render(request,'periode.html')
-
+@login_required
 def template(request):
     return render(request,'template.html')
 
-
+@login_required
 def recupere_periode (request):
     data=dict()
     print('recuperation')
@@ -263,7 +284,15 @@ def modifier_mvt(request, pk):
 
 
 def liste_tiers(request):
-    tiers = Tiers.objects.all()
+    tier = Tiers.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(tier, 10)
+    try:
+        tiers = paginator.page(page)
+    except PageNotAnInteger:
+        tiers = paginator.page(1)
+    except EmptyPage:
+        tiers = paginator.page(paginator.num_pages)
     return render(request, 'liste_tiers.html', {'tiers': tiers})
 
 
@@ -310,6 +339,8 @@ def pdf_report_create(request):
         jour = request.POST.get('jour')
         mois = request.POST.get('mois')
         annee = request.POST.get('annee')
+        dest1 = request.POST.get('signataire1')
+        dest2 = request.POST.get('signataire2')
         periode1 = jour +' '+mois+ ' '+ annee
         mouvement = Mouvement.objects.filter(compte=int(compte), tiers=tiers, periode=periode1)
         for mouv in mouvement:
@@ -351,6 +382,8 @@ def pdf_report_create(request):
          'tiers_mvt':tiers_mvt,
          'periode_mvt': periode_mvt,
          'solde_mvt':solde_mvt,
+         'dest1':dest1,
+         'dest2':dest2,
          'sol':sol   }
     
     # Create a Django response object, and specify content_type as pdf
@@ -520,7 +553,7 @@ def trad(nb, unite=" ", decim="centime"):
         ch=tradn(abs(z1))
     if z1>1 or z1<-1:
         if unite!='':
-            ch=ch+" "+unite+'s'
+            ch=ch+" "+unite+''
     else:
         ch=ch+" "+unite
     if z2>0:

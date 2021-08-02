@@ -5,19 +5,30 @@
 {% endblock %}
 {% block content %}
   <h1 class="page-header">Tiers</h1>
-  <p>
-    <button type="button"
-            class="btn btn-primary js-create-book"
-            data-url="{% url 'tiers_create' %}">
-      <span class="glyphicon glyphicon-plus"></span>
-      Nouveau Tiers
-    </button>
-
+  <p>    
+        <button type="button" class="btn btn-dark"><a href="{% url 'ajouter_tiers' %}" style='color: white;'><span class="glyphicon glyphicon-plus"></span> 
+        Nouveau Tiers</a></button>
   </p>
   {% include 'tiers/liste_partiel_tiers.html' %}
-  <div class="modal fade" id="modal-book">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      </div>
-    </div>
+  {% if tiers.has_other_pages %}
+    <ul class="pagination">
+      {% if tiers.has_previous %}
+        <li><a class="page-link" href="?page={{ tiers.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in tiers.paginator.page_range %}
+        {% if tiers.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if tiers.has_next %}
+        <li><a class="page-link" href="?page={{ tiers.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
 {% endblock %}

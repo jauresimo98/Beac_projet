@@ -3,19 +3,63 @@
 
 {% block content %}
 
-<div> <h3 style="text-align:center;">Chargement du fichier excel</h3> </div>
+<div>
+  <h3 style="text-align:center;">Chargement du fichier excel</h3>
+</div>
 
 
 
-<form method="post" enctype="multipart/form-data" style="text-align:center;">
+<form id="contactForm1" method="post" enctype="multipart/form-data" style="text-align:center;">
   {% csrf_token %}
-  <input type="file" name="myfile">
+  <input type="file" name="myfile" required>
   <button type="submit">Chager le fichier Excel </button>
 </form>
+<script type="text/javascript">
+  $(document).ready(function () {
+    console.log("ready!");
+    $("body").on("submit", "#contactForm1", function (e) {
+      e.preventDefault();
 
+      var frm = $('#contactForm1');
+      var formData = new FormData(document.getElementById("contactForm1"));
+      $.ajax({
+        url: frm.attr('action'),
+        type: 'POST',
+        data: formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+        success: function (data) {
+          console.log(data);
+          alert("Fin de l'operation");
+          frm[0].reset();
+        },
+        error: function (data) {
+          console.log('An error occurred.');
+          console.log(data);
+        },
+      });
+
+    });
+
+    $("#submitBtn").click(function () {
+      var frm = $('#contactForm1');
+
+      var formData = new FormData();
+      formData.append('file', frm.files[0]);
+
+      frm.submit(function (e) {
+
+        e.preventDefault();
+        /*
+        //*/
+        return false;
+      });
+    }
+    );
+  });
+
+
+</script>
 
 
 {% endblock %}
-
-
-  

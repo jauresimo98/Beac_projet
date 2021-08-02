@@ -1,28 +1,28 @@
 <table class="table" id="book-table">
     <thead>
       <tr>
-        <th>#</th>
-        <th>centre</th>
+        
         <th>compte </th>
         <th>tiers</th>
+        <th>destinataire </th>
         <th>description</th>
-        <th>destinataire</th>
         
       </tr>
     </thead>
     <tbody>
-      {% for tiers in tires %}
+      {% for tiers in tiers %}
       <tr>
-        <td>{{ tiers.centre }}</td>
+        
         <td>{{ tiers.compte }}</td>
         <td>{{ tiers.tiers }}</td>
+        <td>{{ tiers.destinataire }}</td>
+        <td>{{ tiers.description1 }}</td>
        
         <td>
-          <button type="button"
-                  class="btn btn-warning btn-sm js-update-book"
-                  data-url="{% url 'tiers_update' tiers.id %}">
-            <span class="glyphicon glyphicon-pencil"></span> Edit
-          </button>
+          <button type="button" class="btn btn-warning"><a href="{% url 'modifier_tiers' tiers.id %}" style='color: white;'>
+            <span class="glyphicon glyphicon-plus"></span> 
+            Modifier Tiers</a></button>
+          
         </td>
       </tr>
     {% empty %}

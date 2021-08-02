@@ -5,7 +5,10 @@
         body{
             width:800px;
             margin:auto;
+            font-size: 12px;
+            padding: 5px;
         }
+        
     </style>
     <body>
         <table>
@@ -14,15 +17,16 @@
                         BANQUE DES ETATS<br/>
                         DE<br/>
                         L'AFRIQUE CENTRALE<br/>
-                        <img src="C:\Users\chace\Desktop\BEAC\service_comptabilite\releveCompte\static\images\logo.jpg" alt="Logo BEAC" width='50px'><br/>
+                        <img src="C:\Users\chace\Desktop\BEAC\service_comptabilite\releveCompte\static\images\logo.jpg" alt="Logo BEAC" width='70px'><br/>
                         REPUBLIQUE GABONAISE<br/>
                          ---------<br/>
                         <small>Siège Social et Direction Nationale</small>  <br/>
                         LIBREVILLE<br/>
                         ----------<br/>
                         B.P 112-Tél. : 1176-13-52/1176-02-09<br/>
+                        Fax : 11 74 45 63 <br/>
                         ----------<br/>
-                        <strong> Service Comptabilite et Operation Financieres </strong> <br/>
+                        <small><b> Service Comptabilite et Operation Financieres</b> </small> <br/>
                 </td>
                 <td  with="500" style="width:100px;">
 
@@ -56,47 +60,37 @@
             </tr>
         </table>
     </br> </br>
-    <td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  JCN/MGAN</td>
+    <td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <i>JCN/MGAN</i></td>
 </br>
-        <div style="padding: 20px; margin: 2px; font-size: 13px; ">
+        <div style="margin-left: 50px; margin-right:20px; font-size: 14px; text-align: justify;">
            
-            <td>N° ____________/SCOF/2021</td><br>
-            <td><strong>Objet</strong> :  Relevé de votre compte  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}}</br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp du <strong>  1<sup>er</sup> </strong> au <strong> {{periode_mvt}} </strong></br></br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{dest}} ,</br></br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <strong>  N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}}  </strong> 
-                    dans nos livres arrêté en capitaux au{{periode}}, présentant un solde {%if sol != 'p' %} debiteur{%else%}créditeur{%endif%} de Francs CFA <strong> {{solde_mvt}} </strong> 
-                    <strong> ( {{nombrelettre}}). </strong></td><br>
+            <td><b>N° ____________/SCOF/2021</b></td><br>
+            <td><b><u>Objet</u></b> :  Relevé de votre compte  <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> </br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp du <b>  1<sup>er</sup> </b> au <b> {{periode_mvt}} </b></br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp <b> {{dest}}</b>,</br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> 
+                    dans nos livres arrêté en capitaux au{{periode}}, présentant un solde {%if sol != 'p' %} débiteur{%else%}créditeur{%endif%} de Francs CFA <b> {{solde_mvt}} </b> 
+                    <b> ( {{nombrelettre}}). </b></td><br>
              </br>
             
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Sans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l'ensemble des écritures de votre relevé ainsi que 
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Sans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l'ensemble des écritures de votre relevé ainsi que 
                 le solde arrêté du mois seront considérés comme approuves et ne pourront plus faire l'objet de réclamation.</br> </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouve ci-joint. </br> </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Veuillez agréer,  {{dest}},     l'expression de ma parfaite considération.</br> </br>   
-        
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouve ci-joint. </br> </br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Veuillez agréer, <b >  {{dest}}</b>, l'expression de ma parfaite considération.</br> </br>   
+        <br/>
+        <br/>
+        <h5 style="text-align: center; margin-left: 170px;"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp P/Le Directeur National,</h5>
         <table>
-
-
-            <tr>
-                <td with="500" style="text-align: center; width:500px;">
-
-                </td>
-                <td with="500" style="text-align: right; width:0px;">
-                    <h5> &nbsp P/Le Directeur National,</h5>
-                </td>
-                <td with="500" style="width:500px; vertical-align: top;">
-                    
-                </td>
-            </tr>
+         <br/>
             <tr>
                 <td with="500" style="text-align: center; width:500px;">
 
                 </td>
                 <td with="500" style="text-align: left; width:500px;">
-                    <h5>{{dest1}}</h5>
+                    <h5><u>{{dest2}}</u></h5>
                 </td>
                 <td with="500" style="width:500px; vertical-align: top;">
-                    <h5>{{dest2}}</h5>
+                    <h5><u>{{dest1}}</u></h5>
                 </td>
             </tr>
             <tr>

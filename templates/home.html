@@ -7,86 +7,115 @@
 <div class="row">
  <form action="{% url 'create-pdf' %}" method="POST">
     {% csrf_token %}
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Tiers:</h5>
-			<hr>
-            <div class="input-group mb-3">
-                <input type="text" name="compte" class="form-control" placeholder="compte" aria-label="Compte">
-                    <span class="input-group-text"></span>
-                <input type="text" name="tiers" class="form-control" placeholder="tiers" aria-label="Tiers">
+    <table>
+        <tr>
+            <td style="padding-left: 50px;">
+            <div class="col-md-12">
+                <div class="card card-body">
+                    <h5>Tiers:</h5>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <input type="text" name="compte" class="form-control" placeholder="compte" aria-label="Compte" required>
+                            <span class="input-group-text"></span>
+                        <input type="text" name="tiers" class="form-control" placeholder="tiers" aria-label="Tiers" required>
+                    </div>
+                    <!-- <a class="btn btn-outline-info  btn-sm btn-block" href="">Tiers</a>
+                    <a class="btn btn-outline-danger  btn-sm btn-block" href="">Periode</a> -->
+        
+                </div>
             </div>
-			<!-- <a class="btn btn-outline-info  btn-sm btn-block" href="">Tiers</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Periode</a> -->
-
-		</div>
-	</div>
-
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Periode</h5>
-			<hr>
-			<div class="form-group">
-                <label> Jour </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jour">
-                    <option selected>Votre choix </option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                </select>
+        </td>
+        <td style="padding-left: 50px;">
+            <div class="col-md-20">
+                <div class="card card-body">
+                    <h5>Periode</h5>
+                    <hr>
+                    <div class="form-group">
+                        <label> Jour </label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jour"  required>
+                            <option selected>Votre choix </option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label> Mois </label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois"  required>
+                            <option selected>Votre choix </option>
+                            <option value="Janvier">Janvier</option>
+                            <option value="Fevrier">Février</option>
+                            <option value="Marc">Mars</option>
+                            <option value="Avril">Avril</option>
+                            <option value="Mai">Mai</option>
+                            <option value="Juin">Juin</option>
+                            <option value="Juillet">Juillet</option>
+                            <option value="Aout">Aout</option>
+                            <option value="Septembre">Septembre</option>
+                            <option value="Octobre">Octobre</option>
+                            <option value="Novembre">Novembre</option>
+                            <option value="Decembre">Decembre</option>
+                        </select>
+                  </div>
+                  <div class="form-group">
+                    <label> Annee </label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect12" name="annee"  required>
+                        <option selected>Votre choix </option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                    </select>
+                  </div>
+                </div>
+            </div>   
+        </td> 
+        <td style="padding-left: 50px;">
+            <div class="col-md-20">
+                <div class="card card-body">
+                    <h5>Les Signataires</h5>
+                    <hr>
+                  
+                  <div class="form-group">
+                    <label> Signataire 1 </label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect5" name="signataire1"  required>
+                        <option selected>Votre choix </option>
+                        <option value="S. NEMBE">S. NEMBE </option>
+                        <option value=""> </option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label> Signataire 2 </label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect51" name="signataire2">
+                        <option selected>Votre choix </option>
+                        <option value="J. C. NGOYE">J. C. NGOYE </option>
+                        <option value=""> </option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                  </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label> Mois </label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="mois">
-                    <option selected>Votre choix </option>
-                    <option value="Janvier">Janvier</option>
-                    <option value="Fevrier">Février</option>
-                    <option value="Marc">Mars</option>
-                    <option value="Avril">Avril</option>
-                    <option value="Mai">Mai</option>
-                    <option value="Juin">Juin</option>
-                    <option value="Juillet">Juillet</option>
-                    <option value="Aout">Aout</option>
-                    <option value="Septembre">Septembre</option>
-                    <option value="Octobre">Octobre</option>
-                    <option value="Novembre">Novembre</option>
-                    <option value="Decembre">Decembre</option>
-                </select>
-          </div>
-          <div class="form-group">
-            <label> Annee </label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="annee">
-                <option selected>Votre choix </option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-            </select>
-          </div>
-		</div>
-	</div>
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Destinataire</h5>
-			<hr>
-            <p></p>
-			<p></p>
-			<h1 style="text-align: center;padding: 10px"></h1>
-		</div>
-	</div>
-</div>
+        </td> 
+        </tr>
+        <tr>
+            <td>
+                <br>
+        <div class="row" style="text-align: center;">
+	        <div class="col">
+		        <div class="card card-body">
+		            <button class="btn btn-primary p-2" type="submit">Générer la lettre  </button>
+		        </div>
+	        </div>
 
-
-<br>
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-		    <button class="btn btn-primary" type="submit">Valider</button>
-		</div>
-	</div>
-
-</div>
+        </div>
+            </td>
+        </tr>
+    </table>
+	
 </form>
 <br>
 

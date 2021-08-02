@@ -4,7 +4,6 @@ class Tiers(models.Model):
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
-    destinataire = models.CharField(max_length=254, null=True)
     description = models.CharField(max_length=254, null=True)
     destinataire =  models.CharField(max_length=254, null=True)
     description1  =  models.CharField(max_length=254, null=True)
@@ -17,6 +16,7 @@ class Tiers(models.Model):
 
     def __str__(self):
         return self.tiers
+    
 
 
 class Mouvement(models.Model):
