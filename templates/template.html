@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+    {%for tier in tiers%}
+    {%for mouvement in mouvements%}
+    {%if tier.centre == mouvement.centre and tier.compte == mouvement.compte and tier.tiers == mouvement.tiers%}
+    {%if tier.etat == 'Actif'%}
     {% load static %}
     <style>
         body{
@@ -17,7 +21,7 @@
                         BANQUE DES ETATS<br/>
                         DE<br/>
                         L'AFRIQUE CENTRALE<br/>
-                        <img src="C:\Users\chace\Desktop\BEAC\service_comptabilite\releveCompte\static\images\logo.jpg" alt="Logo BEAC" width='70px'><br/>
+                        <img src="C:\Users\chace\Desktop\BEAC\service_comptabilite\releveCompte\static\images\logo.jpg" alt="Logo BEAC" width="70px"><br/>
                         REPUBLIQUE GABONAISE<br/>
                          ---------<br/>
                         <small>Siège Social et Direction Nationale</small>  <br/>
@@ -26,79 +30,80 @@
                         B.P 112-Tél. : 1176-13-52/1176-02-09<br/>
                         Fax : 11 74 45 63 <br/>
                         ----------<br/>
-                        <small><b> Service Comptabilite et Operation Financieres</b> </small> <br/>
+                        <b><i> Service Comptabilite et Operation Financieres</i> </b> <br/>
                 </td>
                 <td  with="500" style="width:100px;">
 
                 </td>
                 <td  with="500" style="width:500px; vertical-align: top;">
                     Libreville, le<br/><br/><br/><br/><br/>
-                    <b style="font-size: 13px;">&nbsp &nbsp  {{dest}} </b>  <br/><br/>
-                    <b style="font-size: 13px;">&nbsp &nbsp  {{desc1}} </b>  <br/><br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{tier.destinataire}} </b>  <br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description1}} </b>  <br/>
                     {%if desc2 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc2}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description2}} </b>  <br/>
                      {%endif%}
                      {%if desc3 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc3}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description3}} </b>  <br/>
                      {%endif%}
                      {%if desc4 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc4}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description4}} </b>  <br/>
                      {%endif%}
                      {%if desc5 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc5}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description5}} </b>  <br/>
                      {%endif%}
                      {%if desc6 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc6}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description6}} </b>  <br/>
                      {%endif%}
                      {%if desc7 != None%}
-                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc7}} </b>  <br/><br/>
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{tier.description7}} </b>  <br/>
                      {%endif%}
                      
-                    
+                   <br> 
                    <b><u>LIBREVILLE</u></b>  
                 </td>
             </tr>
         </table>
-    </br> </br>
-    <td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <i>JCN/MGAN</i></td>
-</br>
-        <div style="margin-left: 50px; margin-right:20px; font-size: 14px; text-align: justify;">
+    <br> 
+    <!-- <td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <i>JCN/MGAN</i></td> -->
+
+        <div style="margin-right: 3px; margin-left: 50px; font-size: 15.75px;  ">
            
             <td><b>N° ____________/SCOF/2021</b></td><br>
-            <td><b><u>Objet</u></b> :  Relevé de votre compte  <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> </br>
-                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp du <b>  1<sup>er</sup> </b> au <b> {{periode_mvt}} </b></br></br>
-                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp <b> {{dest}}</b>,</br></br>
-                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp J’ai l'honneur de vous adresser ci-joint le relevé de votre compte   <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> 
-                    dans nos livres arrêté en capitaux au{{periode}}, présentant un solde {%if sol != 'p' %} débiteur{%else%}créditeur{%endif%} de Francs CFA <b> {{solde_mvt}} </b> 
-                    <b> ( {{nombrelettre}}). </b></td><br>
+            <td><b><u>Objet</u></b> :  Relevé de votre compte  <b>N°  {{tier.centre}}  {{tier.compte}} {{tier.tiers}} </b> </br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp du <b>  1<sup>er</sup> </b> au <b> {{periode}} </b></br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp <b> {{tier.destinataire}}</b>,</br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbspJ’ai l’honneur de vous adresser ci-joint le relevé  de votre compte   <b>N°  {{tier.centre}}  {{tier.compte}} {{tier.tiers}} </b> 
+                    dans nos livres arrêté en capitaux au <b> {{periode}}</b> , présentant un solde {%if mouvement.etat == 1 %} débiteur{%else%}créditeur{%endif%} de Francs CFA <b> {{mouvement.solde}} </b> 
+                    <b> ( {{mouvement.solde_lettre}}). </b></td><br>
              </br>
             
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Sans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l'ensemble des écritures de votre relevé ainsi que 
-                le solde arrêté du mois seront considérés comme approuves et ne pourront plus faire l'objet de réclamation.</br> </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouve ci-joint. </br> </br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Veuillez agréer, <b >  {{dest}}</b>, l'expression de ma parfaite considération.</br> </br>   
-        <br/>
-        <br/>
-        <h5 style="text-align: center; margin-left: 170px;"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp P/Le Directeur National,</h5>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbspSans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l’ensemble des écritures de votre relevé ainsi que le solde arrêté du mois seront considérés comme approuvés et ne pourront plus faire l’objet de réclamation.</br> </br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouvé ci-joint. </br> </br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Veuillez agréer,  <b >  {{tier.destinataire}} </b>, l’expression de ma parfaite considération.</br>   
+        
+        
+        
+        <p style="text-align: center; margin-left: 10px;">  P/Le Directeur National,</p>
         <table>
          <br/>
             <tr>
-                <td with="500" style="text-align: center; width:500px;">
+                <!-- <td with="500" style="text-align: center; width:500px;">
 
-                </td>
+                </td> -->
                 <td with="500" style="text-align: left; width:500px;">
-                    <h5><u>{{dest2}}</u></h5>
+                    <h6>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <u>Chef Service</u></h6>
                 </td>
                 <td with="500" style="width:500px; vertical-align: top;">
-                    <h5><u>{{dest1}}</u></h5>
+                    <h6>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp<u>Directeur National Adjoint</u></h6>
                 </td>
             </tr>
-            <tr>
-                <td>PJ/</td>
-            </tr>
         </table>
+           <span>PJ/</span>
     </div>
-    
+    {%endif%}
+    {%endif%}
+    {%endfor%}
+    {%endfor%}
       
     </body>
 </html>

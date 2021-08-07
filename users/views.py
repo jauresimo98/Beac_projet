@@ -36,9 +36,11 @@ def login_login(request):
             user = authenticate(username=username,password= pwd)
             if user is not None:
                 login(request,user)
+                print(user.is_superuser)
                 return redirect('home')
             else:
                 messages.error(request, "erreur t'authentification ")
+                print('pqs de permission')
                 return render(request, 'users/login.html',{'form':form})
         else:
             for field in form.errors:

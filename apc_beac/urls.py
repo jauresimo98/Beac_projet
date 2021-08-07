@@ -11,7 +11,7 @@ urlpatterns = [
     #path('periode', views.periode, name='periode'),
     path('recupere_periode', views.recupere_periode, name='recupere_periode'),
     path('mvt/', views.liste_mvt, name='mvt_list'),
-    path('mvt/ADD/', views.creer_mvt, name='mvt_create'),
+    path('mvt/creer/', views.creer_mvt, name='mvt_create'),
     path('mvt/(?P<pk>\d+)/update/$', views.modifier_mvt, name='mvt_update'),
     path('tiers/', views.liste_tiers, name='tiers_list'),
     path('tiers/ADD/', views.creer_tiers, name='tiers_create'),
@@ -20,5 +20,6 @@ urlpatterns = [
     path('liste_user', views.liste_user,name='liste_user'),
     path('ajouter_tiers',views.AddTiers.as_view(),name= 'ajouter_tiers'),
     path('modifier_tiers/<int:pk>',views.UpdateTiers.as_view(),name= 'modifier_tiers'),
+    # path('fichier_existe',views.fichier_existe,name= 'fichier_existe'),
 
 ]

@@ -13,6 +13,7 @@ class Tiers(models.Model):
     description5  =  models.CharField(max_length=254, null=True)
     description6  =  models.CharField(max_length=254, null=True)
     description7  =  models.CharField(max_length=254, null=True)
+    etat  =  models.CharField(max_length=254, null=True, default='Actif')
 
     def __str__(self):
         return self.tiers
@@ -25,10 +26,13 @@ class Mouvement(models.Model):
     compte= models.IntegerField(blank=True,null=True)
     centre= models.IntegerField(blank=True,null=True)
     tiers = models.CharField(max_length=254, null=True)
-
+    solde_lettre = models.CharField(max_length=254, null=True)
+    etat = models.IntegerField(blank=True,null=True)
 class Periode(models.Model):
     mois =models.CharField(max_length=254, null=True)
     jour =models.CharField(max_length=254, null=True)
+    annee =models.CharField(max_length=254, null=True)
+
 
     
 

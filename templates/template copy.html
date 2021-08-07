@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <style>
+        body{
+            width:800px;
+            margin:auto;
+            font-size: 12px;
+            padding: 5px;
+        }
+        
+    </style>
+    <body>
+        <table>
+            <tr>
+                <td with="500" style="text-align: center; width:500px;">
+                        BANQUE DES ETATS<br/>
+                        DE<br/>
+                        L'AFRIQUE CENTRALE<br/>
+                        <img src="C:\Users\chace\Desktop\BEAC\service_comptabilite\releveCompte\static\images\logo.jpg" alt="Logo BEAC" width='70px'><br/>
+                        REPUBLIQUE GABONAISE<br/>
+                         ---------<br/>
+                        <small>Siège Social et Direction Nationale</small>  <br/>
+                        LIBREVILLE<br/>
+                        ----------<br/>
+                        B.P 112-Tél. : 1176-13-52/1176-02-09<br/>
+                        Fax : 11 74 45 63 <br/>
+                        ----------<br/>
+                        <small><b> Service Comptabilite et Operation Financieres</b> </small> <br/>
+                </td>
+                <td  with="500" style="width:100px;">
+
+                </td>
+                <td  with="500" style="width:500px; vertical-align: top;">
+                    Libreville, le<br/><br/><br/><br/><br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{dest}} </b>  <br/>
+                    <b style="font-size: 13px;">&nbsp &nbsp  {{desc1}} </b>  <br/>
+                    {%if desc2 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc2}} </b>  <br/>
+                     {%endif%}
+                     {%if desc3 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc3}} </b>  <br/>
+                     {%endif%}
+                     {%if desc4 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc4}} </b>  <br/>
+                     {%endif%}
+                     {%if desc5 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc5}} </b>  <br/>
+                     {%endif%}
+                     {%if desc6 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc6}} </b>  <br/>
+                     {%endif%}
+                     {%if desc7 != None%}
+                     <b style="font-size: 13px;">&nbsp &nbsp  {{desc7}} </b>  <br/>
+                     {%endif%}
+                     
+                    
+                   <b><u>LIBREVILLE</u></b>  
+                </td>
+            </tr>
+        </table>
+    </br> </br>
+    <!-- <td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <i>JCN/MGAN</i></td> -->
+
+        <div style="margin-right: 3; margin-left: 3; font-size: 15.75px;  ">
+           
+            <td><b>N° ____________/SCOF/2021</b></td><br>
+            <td><b><u>Objet</u></b> :  Relevé de votre compte  <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> </br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp du <b>  1<sup>er</sup> </b> au <b> {{periode_mvt}} </b></br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp <b> {{dest}}</b>,</br></br>
+                 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbspJ’ai l’honneur de vous adresser ci-joint le relevé  de votre compte   <b>N°  {{centre_mvt}}  {{compte_mvt}} {{tiers_mvt}} </b> 
+                    dans nos livres arrêté en capitaux au{{periode}}, , présentant un solde {%if sol != 'p' %} débiteur{%else%}créditeur{%endif%} de Francs CFA <b> {{solde_mvt}} </b> 
+                    <b> ( {{nombrelettre}}). </b></td><br>
+             </br>
+            
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbspSans observation de votre part reçue dans un délai de trente (30) jours calendaires à compter de la date de réception, l’ensemble des écritures de votre relevé ainsi que le solde arrêté du mois seront considérés comme approuvés et ne pourront plus faire l’objet de réclamation.</br> </br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Vous voudrez bien retourner la formule de bien trouvé ci-joint. </br> </br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp Veuillez agréer,  <b >  {{dest}}</b>, l’expression de ma parfaite considération.</br> </br>   
+        
+        
+        {% if dest1 != 'Votre choix' and dest2 != 'Votre choix'%}
+        <h5 style="text-align: center; margin-left: 170px;"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp P/Le Directeur National,</h5>
+        <table>
+         <br/>
+            <tr>
+                <td with="500" style="text-align: center; width:500px;">
+
+                </td>
+                <td with="500" style="text-align: left; width:500px;">
+                    <h5><u>{{dest2}}</u></h5>
+                </td>
+                <td with="500" style="width:500px; vertical-align: top;">
+                    <h5><u>{{dest1}}</u></h5>
+                </td>
+            </tr>
+        </table>
+            {%else%}
+             <p style="text-align: center;">&nbsp &nbsp &nbsp Le Directeur National </p><br></br>
+            {%endif%}
+           <p>PJ/</p>
+    </div>
+    
+      
+    </body>
+</html>

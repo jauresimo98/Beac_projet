@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <h5><i class="bi bi-download"></i>Erreur lors du  chargement </h5>
+    </div>
+    <div class="card-body">
+        {%if controle == 0%}
+        <h1 class="card-text">un fichier a été dèja remplit pour cette période</h1>
+        <h5 class="card-alert" style="color: red;">{{periode2}}</h5>
+        {% elif controle == 1%}
+        <h4 class="card-text"> Les informations saisies ne correspondent à aucune donnée existante</h4>
+        <h5 class="card-text">Veuillez vérifier ces informations </h5>
+        <table class="table">
+            <tbody>
+              <tr>
+                <td>Compte :</td>
+                <td>{{compte}}</td>
+              </tr>
+              <tr>
+                <td>Tiers : </td>
+                <td>{{tiers}}</td>
+              </tr>
+              <tr>
+                <td>Periode : </td>
+                <td>{{periode}}</td>
+              </tr>
+            </tbody>
+          </table>
+       {%endif%}
+
+    </div>
+ </div>
+  
+
+
+
+{% endblock%}

@@ -2,24 +2,29 @@
 
 
 {% block content %}
-
-<div>
-  <h3 style="text-align:center;">Chargement du fichier excel</h3>
+<div class="card text-center">
+  <div class="card-header">
+    <h3 style="text-align:center;">Chargement du fichier excel</h3>
+  </div>
+  <div class="card-body">
+    <form id="contactForm1" method="post" enctype="multipart/form-data" style="text-align:center;">
+      {% csrf_token %}
+      <input type="file" name="myfile" required class="btn btn-ifno"> 
+      <button type="submit" class="btn btn-primary" id="btn"> Chager le fichier Excel </button>
+    </form>
+    
+  </div>
+  <div class="card-footer text-muted">
+    <small style="text-align: center;">Le fichier doit être sur un format bien défini avec l'extension .xlsx</small>
+  </div>
 </div>
 
-
-
-<form id="contactForm1" method="post" enctype="multipart/form-data" style="text-align:center;">
-  {% csrf_token %}
-  <input type="file" name="myfile" required>
-  <button type="submit">Chager le fichier Excel </button>
-</form>
 <script type="text/javascript">
   $(document).ready(function () {
     console.log("ready!");
     $("body").on("submit", "#contactForm1", function (e) {
       e.preventDefault();
-
+      $("btn").css("background-color", "yellow");
       var frm = $('#contactForm1');
       var formData = new FormData(document.getElementById("contactForm1"));
       $.ajax({
@@ -40,6 +45,9 @@
       });
 
     });
+    $("#btn").onclick(function(){
+         $(this).css("background-color", "yellow");
+       });
 
     $("#submitBtn").click(function () {
       var frm = $('#contactForm1');
